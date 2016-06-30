@@ -1,4 +1,4 @@
-set(EXEC_NAME online-test)
+set(EXEC_NAME online-stereo-learning)
 
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 
@@ -19,7 +19,7 @@ else()
     set(OCV_MODULE "imgcodecs")
 endif()
 
-find_package(OpenCV ${OCV_VERSION} COMPONENTS core highgui imgproc ${OCV_MODULE} REQUIRED)
+find_package(OpenCV ${OCV_VERSION} COMPONENTS core highgui imgproc calib3d ${OCV_MODULE} REQUIRED)
 find_package(CUDA ${CUDA_VERSION} REQUIRED)
 
 include_directories(include)

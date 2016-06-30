@@ -39,5 +39,6 @@ bool StereoCamera::read() {
 }
 
 void StereoCamera::calibrate() {
-
+    // the SDK continuously self calibrates the camera in the background
+    zed.resetSelfCalibration();
 }

@@ -4,9 +4,12 @@
 
 #include <iostream>
 
-int main(void) {
+int main(int argc, char **argv) {
     StereoCamera camera;
 
+    if (argc > 1 && !strcmp(argv[1], "calibrate")) {
+        camera.calibrate();
+    }
     char key = ' ';
     float ratio = float(camera.getWidth())/float(camera.getHeight());
     const int display_height = 320;

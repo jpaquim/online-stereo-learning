@@ -24,12 +24,12 @@ private:
 #else
     cv::VideoCapture cap;
     cv::Mat side_by_side;
+#endif
     int height;
     int width;
     cv::Mat image_left;
     cv::Mat image_right;
     cv::Mat depth_map;
-#endif
 };
 
 #endif
