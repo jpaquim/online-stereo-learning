@@ -27,9 +27,12 @@ private:
 #endif
     int height;
     int width;
-    cv::Mat image_left;
-    cv::Mat image_right;
+    cv::Size image_size;
+    cv::Mat images[2];
+    cv::Mat &image_left;
+    cv::Mat &image_right;
     cv::Mat depth_map;
+    using image_index = uint8_t;
 };
 
 #endif

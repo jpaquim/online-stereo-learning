@@ -3,7 +3,9 @@
 
 #include <exception>
 
-StereoCamera::StereoCamera() {
+StereoCamera::StereoCamera()
+: image_left(images[0])
+, image_right(images[1]) {
     sl::zed::InitParams params; // default MODE is PERFORMANCE
     // sl::zed::InitParams params(sl::zed::MODE::MEDIUM);
     // sl::zed::InitParams params(sl::zed::MODE::QUALITY);
@@ -19,8 +21,10 @@ StereoCamera::StereoCamera() {
 
     height = zed.getImageSize().height;
     width =  zed.getImageSize().width;
-    image_left =  cv::Mat(height, width, CV_8UC4);
-    image_right = cv::Mat(height, width, CV_8UC4);
+    image_size = cv::Size(height, width);
+    for (image_index i = 0; i < 2; ++i) {
+        images[i] =  cv::Mat(height, width, CV_8UC4);
+    }
 }
 
 bool StereoCamera::read() {

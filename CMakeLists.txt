@@ -43,7 +43,8 @@ add_definitions(-std=c++0x)# -m64)
 target_link_libraries(${EXEC_NAME} ${ZED_LIBRARIES} ${OpenCV_LIBRARIES}
     ${CUDA_LIBRARIES} ${CUDA_nppi_LIBRARY} ${CUDA_npps_LIBRARY})
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O3" ) # Release Perf mode 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3" ) # for performance
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Wextra" ) # for debugging
 
 option(WITH_ZED_SDK "Use the ZED SDK for depth estimation" ON)
 

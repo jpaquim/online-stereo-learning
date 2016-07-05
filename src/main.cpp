@@ -17,11 +17,12 @@ int main(int argc, char **argv) {
     cv::Size display_size(ratio*display_height, display_height);
 
     while (key != 'q') {
-        if (camera.read()) {
-            cv::Mat display(display_size, CV_8UC4);
-            cv::resize(camera.getImageLeft(), display, display_size);
-            cv::imshow("Display", display);
+        if (!camera.read()) {
+            continue;
         }
+        cv::Mat display(display_size, CV_8UC4);
+        cv::resize(camera.getImageLeft(), display, display_size);
+        cv::imshow("Display", display);
         key = cv::waitKey(1);
     }
     return 0;
