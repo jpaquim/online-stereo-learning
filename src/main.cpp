@@ -1,4 +1,5 @@
 #include "StereoCamera.h"
+#include "FeatureExtractor.h"
 
 #include <opencv2/opencv.hpp>
 
@@ -6,6 +7,8 @@
 
 int main(int argc, char **argv) {
     StereoCamera camera;
+    cv::Size map_size(300, 200);
+    FeatureExtractor feature_extractor(camera.getSize(), map_size);
 
     if (argc > 1 && !strcmp(argv[1], "calibrate")) {
         camera.calibrate();
@@ -21,7 +24,7 @@ int main(int argc, char **argv) {
             continue;
         }
         cv::Mat display(display_size, CV_8UC4);
-        cv::resize(camera.getImageLeft(), display, display_size);
+        cv::resize(camera.getDepthMap(), display, display_size);
         cv::imshow("Display", display);
         key = cv::waitKey(1);
     }

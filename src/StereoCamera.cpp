@@ -8,22 +8,26 @@
 #   include "StereoCameraNoZED.inc"
 #endif
 
-int StereoCamera::getHeight() {
+int StereoCamera::getHeight() const {
     return height;
 }
 
-int StereoCamera::getWidth() {
+int StereoCamera::getWidth() const {
     return width;
 }
 
-cv::Mat &StereoCamera::getImageLeft() {
+const cv::Size &StereoCamera::getSize() const {
+    return image_size;
+}
+
+const cv::Mat &StereoCamera::getImageLeft() const {
     return image_left;
 }
 
-cv::Mat &StereoCamera::getImageRight() {
+const cv::Mat &StereoCamera::getImageRight() const {
     return image_right;
 }
 
-cv::Mat &StereoCamera::getDepthMap() {
+const cv::Mat &StereoCamera::getDepthMap() const {
     return depth_map;
 }

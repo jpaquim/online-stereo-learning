@@ -38,7 +38,7 @@ file(GLOB_RECURSE SRC_FILES "${SRC_FOLDER}/*.cpp")
 add_executable(${EXEC_NAME} ${SRC_FILES})
 set_property(TARGET ${EXEC_NAME} PROPERTY OUTPUT_NAME ${EXEC_NAME})
 
-add_definitions(-std=c++0x)# -m64)
+add_definitions(-std=c++11)# -m64)
 
 target_link_libraries(${EXEC_NAME} ${ZED_LIBRARIES} ${OpenCV_LIBRARIES}
     ${CUDA_LIBRARIES} ${CUDA_nppi_LIBRARY} ${CUDA_npps_LIBRARY})
