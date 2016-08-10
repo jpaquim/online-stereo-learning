@@ -20,17 +20,23 @@ else()
 endif()
 
 find_package(OpenCV ${OCV_VERSION} COMPONENTS core highgui imgproc calib3d ${OCV_MODULE} REQUIRED)
-find_package(CUDA ${CUDA_VERSION} REQUIRED)
+find_package(CUDA ${CUDA_VERSION})
 
 include_directories(include)
-include_directories(${CUDA_INCLUDE_DIRS})
-include_directories(${ZED_INCLUDE_DIRS})
 include_directories(${OpenCV_INCLUDE_DIRS})
-include_directories(${EIGEN3_INCLUDE_DIR})
-
-link_directories(${ZED_LIBRARY_DIR})
 link_directories(${OpenCV_LIBRARY_DIRS})
-link_directories(${CUDA_LIBRARY_DIRS})
+if(CUDA_FOUND)
+    include_directories(${CUDA_INCLUDE_DIRS})
+    link_directories(${CUDA_LIBRARY_DIRS})
+endif()
+if(ZED_FOUND)
+    include_directories(${ZED_INCLUDE_DIRS})
+    link_directories(${ZED_LIBRARY_DIR})
+endif()
+if(EIGEN3_FOUND)
+    include_directories(${EIGEN3_INCLUDE_DIR})
+endif()
+
 
 set(SRC_FOLDER src)
 file(GLOB_RECURSE SRC_FILES "${SRC_FOLDER}/*.cpp")
@@ -40,8 +46,12 @@ set_property(TARGET ${EXEC_NAME} PROPERTY OUTPUT_NAME ${EXEC_NAME})
 
 add_definitions(-std=c++11)# -m64)
 
-target_link_libraries(${EXEC_NAME} ${ZED_LIBRARIES} ${OpenCV_LIBRARIES}
-    ${CUDA_LIBRARIES} ${CUDA_nppi_LIBRARY} ${CUDA_npps_LIBRARY})
+if(CUDA_FOUND AND ZED_FOUND)
+    target_link_libraries(${EXEC_NAME} ${ZED_LIBRARIES} ${OpenCV_LIBRARIES}
+        ${CUDA_LIBRARIES} ${CUDA_nppi_LIBRARY} ${CUDA_npps_LIBRARY})
+else()
+    target_link_libraries(${EXEC_NAME} ${OpenCV_LIBRARIES})
+endif()
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3" ) # for performance
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Wextra" ) # for debugging
