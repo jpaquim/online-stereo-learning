@@ -23,10 +23,11 @@ int main(int argc, char **argv) {
         if (!camera.read()) {
             continue;
         }
-        cv::Mat display(display_size, CV_8UC4);
-        cv::resize(camera.getDepthMap(), display, display_size);
-        cv::imshow("Display", display);
-        key = cv::waitKey(1);
+        feature_extractor.compute(camera.getImageLeft());
+        // cv::Mat display(display_size, CV_8UC4);
+        // cv::resize(camera.getDepthMap(), display, display_size);
+        // cv::imshow("Display", display);
+        // key = cv::waitKey(1);
     }
     return 0;
 }

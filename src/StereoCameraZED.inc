@@ -4,7 +4,8 @@
 #include <exception>
 
 StereoCamera::StereoCamera()
-: image_left(images[0])
+: zed(sl::zed::VGA)
+, image_left(images[0])
 , image_right(images[1]) {
     sl::zed::InitParams params; // default MODE is PERFORMANCE
     // sl::zed::InitParams params(sl::zed::MODE::MEDIUM);

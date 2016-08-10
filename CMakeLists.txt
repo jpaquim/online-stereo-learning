@@ -7,8 +7,8 @@ set(EXECUTABLE_OUTPUT_PATH ".")
 set(CUDA_VERSION "7.5")
 set(OCV_VERSION "3.1")
         
-find_package(ZED 1.0 REQUIRED)
-find_package(Eigen3 REQUIRED)
+find_package(ZED 1.0)
+find_package(Eigen3)
 
 ##For Jetson, OpenCV4Tegra is based on OpenCV2.4
 exec_program(uname ARGS -p OUTPUT_VARIABLE CMAKE_SYSTEM_NAME2)
@@ -46,9 +46,9 @@ target_link_libraries(${EXEC_NAME} ${ZED_LIBRARIES} ${OpenCV_LIBRARIES}
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3" ) # for performance
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Wextra" ) # for debugging
 
-option(WITH_ZED_SDK "Use the ZED SDK for depth estimation" ON)
+option(NO_ZED_SDK "Do not use the ZED SDK" OFF)
 
-if(WITH_ZED_SDK)
+if(ZED_FOUND AND NOT NO_ZED_SDK)
     add_definitions(-DUSE_ZED_SDK=1)
 else()
     add_definitions(-DUSE_ZED_SDK=0)
