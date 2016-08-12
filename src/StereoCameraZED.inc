@@ -22,7 +22,7 @@ StereoCamera::StereoCamera()
 
     height = zed.getImageSize().height;
     width =  zed.getImageSize().width;
-    image_size = cv::Size(height, width);
+    image_size = cv::Size(width, height);
     for (image_index i = 0; i < 2; ++i) {
         images[i] =  cv::Mat(height, width, CV_8UC4);
     }

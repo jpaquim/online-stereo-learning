@@ -12,7 +12,10 @@ public:
     ~FeatureExtractor() = default;
 
     //
-    void compute(const cv::Mat &image);
+    void compute(const cv::Mat &image, cv::Mat &features);
+
+    // returns the number of features
+    int getNumFeatures();
 
 private:
     cv::Size patch_size;
@@ -33,7 +36,7 @@ private:
     std::vector<cv::Mat> filters;
     std::vector<int> filter_channels;
     int num_features;
-    std::vector<std::vector<float>> feature_map;
+    cv::Mat features;
 
     // populates the filter bank with Laws' masks, local averaging, and
     // Nevatia-Babu oriented edge detectors
